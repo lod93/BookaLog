@@ -1,7 +1,9 @@
-import React from "react";
-import "./App.css";
-import ListBooks from "./components/ListBooks";
-class BooksApp extends React.Component {
+import React, { Component }from "react"
+import "./App.css"
+import ListBooks from "./components/ListBooks"
+import Search from  "./components/Search"
+import { Route,Router } from 'react-router-dom'
+class BooksApp extends Component {
   state = {
     /**
      * TODO: Instead of using this state variable to keep track of which page
@@ -15,7 +17,19 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        <ListBooks />
+         <div>
+       
+        <Route exact path='/' render={() => (
+            <ListBooks />
+          
+        )} />
+        <Route path='/add' render={({ history }) => (
+          <div>add new book</div>
+        )} />
+         <Route path='/search' render={({ history }) => (
+          <Search />
+        )} />
+      </div>
       </div>
     );
   }
