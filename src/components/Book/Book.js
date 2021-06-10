@@ -1,39 +1,30 @@
-import React,{Component} from "react";
-import {Link} from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import BookShelfChanger from "../BookShelfChanger";
 
-
-class Book extends Component  {
-  
-  render(){
-    const coverStyle ={
-      width: 128, 
-      height: 193, 
-      backgroundImage: "url("+this.props.url+")" };
+class Book extends Component {
+  render() {
+    const coverStyle = {
+      width: 128,
+      height: 193,
+      backgroundImage: "url(" + this.props.url + ")",
+    };
     return (
-      
-    <div className="book">
-                    <div className="book-top">
-                        <div className="book-cover" style={coverStyle} >
-                         </div>
-                          
-                          
-                        <div className="book-shelf-changer">
-                            <select>
-                                <option value="move" disabled>Move to...</option>
-                                <option value="currentlyReading">Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option value="none">None</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="book-title">{this.props.title}</div>
-                    <div className="book-authors">{this.props.authors}</div>
-                </div>
-    
+      <li>
+      <div className="book">
+        <div className="book-top">
+          <div className="book-cover" style={coverStyle} />
 
+          <BookShelfChanger />
+        </div>
+        <div className="book-title">
+          <h3>{this.props.title}</h3>
+        </div>
+        <div className="book-authors">{this.props.authors}</div>
+      </div>
+      </li>
     );
-}
+  }
 }
 
 export default Book;
