@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import BookShelfChanger from "../BookShelfChanger";
 
 class Book extends Component {
@@ -15,7 +14,7 @@ class Book extends Component {
         <div className="book-top">
           <div className="book-cover" style={coverStyle} />
 
-          <BookShelfChanger />
+          <BookShelfChanger book={this.props}/>
         </div>
         <div className="book-title">
           <h3>{this.props.title}</h3>
