@@ -1,12 +1,14 @@
 import React,{Component} from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import * as BooksAPI from "../../BooksAPI";
+import "./searchableWords.js"
 class Search extends Component {
-  static propTypes = {
-    books: PropTypes.array.isRequired,
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => this.setState({ books }));
   }
   state = {
-    query: ''
+    query: '',
+    books:[]
   }
   updateQuery = (query) => {
     this.setState(() => ({
@@ -19,12 +21,12 @@ class Search extends Component {
 
   render(){
     const { query } = this.state
-    const { books } = this.props
+    const { books } = this.state
+    
     const showingBooks = query === ''
     ? books
-    : books.filter((c) => (
-        c.name.toLowerCase().includes(query.toLowerCase())
-      ))
+    : books.filter((c) => (c.title.toLowerCase().includes(query.toLowerCase()) ))
+     4
     return (
       <div className="search-books">
       <div className="search-books-bar">
@@ -34,12 +36,19 @@ class Search extends Component {
           >Close</Link>
           
           <div className="search-books-input-wrapper">
-              <input type="text" placeholder="Search by title or author" />
-
+              <input type="text" placeholder="Search by title or author" 
+              value={query}
+            onChange={(event) => this.updateQuery(event.target.value)}
+            />
           </div>
       </div>
       <div className="search-books-results">
           <ol className="books-grid"></ol>
+          {showingBooks.map((book,index) => (
+            <li key={index} className='book-list-item'>
+                {book.title}
+              </li>
+          ))}
       </div>
   </div>
     )
