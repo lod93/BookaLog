@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import * as BooksAPI from "../../BooksAPI";
 import BookShelf from "../BookShelf";
 import { Link } from "react-router-dom";
 
@@ -17,16 +16,8 @@ const BookShelfs = [
 
 class ListBooks extends Component{
 
-  componentDidMount() {
-    BooksAPI.getAll().then((books) => this.setState({ books }));
-  }
-
-  state = {
-    books: [],
-  };
-
   render() {
-    console.log(this.state);
+    console.log(this.props);
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -37,7 +28,7 @@ class ListBooks extends Component{
                 <BookShelf
                   key={index}
                   title={Bookshelf.title}
-                  books={this.state.books.filter(
+                  books={this.props.books.filter(
                     (book) =>
                       book.shelf.toLowerCase() ===
                       Bookshelf.title.toLocaleLowerCase().replace(/ /g, "")
