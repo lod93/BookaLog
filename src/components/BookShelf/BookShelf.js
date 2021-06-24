@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Book from "../Book";
+import placeholder from "../../images/placeholder.png";
 class BookShelf extends Component {
   state = { books: [] };
 
@@ -10,22 +11,27 @@ class BookShelf extends Component {
           <h2 className="bookshelf-title">{this.props.title}</h2>
           <div className="bookshelf-books">
             <ol className="books-grid">
-              {
-              typeof(this.props.shelfBooks) === 'undefined' ||  typeof(this.props.shelfBooks.error) !== 'undefined' ? 'no books found' 
-              : this.props.shelfBooks.map((book, index) => (
-                <Book
-                  setState={(p) => {
-                    this.setState(p.books);
-                    this.props.setState(this.state)
-                  }}
-                  key={index}
-                  title={book.title}
-                  id={book.id}
-                  shelf={book.shelf}
-                  url={book.imageLinks.smallThumbnail}
-                  books={this.props.books}
-                />
-              ))}
+              {typeof this.props.shelfBooks === "undefined" ||
+              typeof this.props.shelfBooks.error !== "undefined"
+                ? "no books found"
+                : this.props.shelfBooks.map((book, index) => (
+                    <Book
+                      setState={(p) => {
+                        this.setState(p.books);
+                        this.props.setState(this.state);
+                      }}
+                      key={index}
+                      title={book.title}
+                      id={book.id}
+                      shelf={book.shelf}
+                      url={
+                        typeof book.imageLinks === "undefined"
+                          ? placeholder
+                          : book.imageLinks.smallThumbnail
+                      }
+                      books={this.props.books}
+                    />
+                  ))}
             </ol>
           </div>
         </div>

@@ -10,7 +10,7 @@ class Book extends Component {
     const coverStyle = {
       width: 128,
       height: 193,
-      backgroundImage: "url(" + this.props.url + ")",
+      backgroundImage: "url(" +   this.props.url  + ")",
     };
     return (
       <li>
