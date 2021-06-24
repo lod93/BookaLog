@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import BookShelf from "../BookShelf";
 import { Link } from "react-router-dom";
+import * as BooksAPI from "../../BooksAPI";
 
 const BookShelfs = [
   {
@@ -13,11 +14,15 @@ const BookShelfs = [
     title: "Read",
   },
 ];
+class ListBooks extends Component {
+  state = {
+    books: [],
+  };
 
-class ListBooks extends Component{
-
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => this.setState({ books }));
+  }
   render() {
-    console.log(this.props);
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -26,9 +31,13 @@ class ListBooks extends Component{
             <div>
               {BookShelfs.map((Bookshelf, index) => (
                 <BookShelf
+                  setState={(p) => {
+                    this.setState(p);
+                  }}
                   key={index}
                   title={Bookshelf.title}
-                  books={this.props.books.filter(
+                  books={this.state.books}
+                  shelfBooks={this.state.books.filter(
                     (book) =>
                       book.shelf.toLowerCase() ===
                       Bookshelf.title.toLocaleLowerCase().replace(/ /g, "")

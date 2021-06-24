@@ -18,9 +18,17 @@ const options = [
 class BookShelfChanger extends Component {
   state = {
     shelf: "",
+    books: [],
   };
+
   handleChangeShelf(book, target) {
-    BooksAPI.update(book, target);
+    BooksAPI.update(book, target).then(BooksAPI.getAll()
+    .then((books) => {
+    this.setState({ books });
+    this.props.setState(books);
+    }
+    ))
+    ;
   }
   render() {
     return (

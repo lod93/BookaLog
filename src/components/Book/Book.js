@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import BookShelfChanger from "../BookShelfChanger";
 
 class Book extends Component {
+  state ={
+    books: [],
+  }
+  
   render() {
     const coverStyle = {
       width: 128,
@@ -10,17 +14,24 @@ class Book extends Component {
     };
     return (
       <li>
-      <div className="book">
-        <div className="book-top">
-          <div className="book-cover" style={coverStyle} />
+        <div className="book">
+          <div className="book-top">
+            <div className="book-cover" style={coverStyle} />
 
-          <BookShelfChanger book={this.props}/>
+            <BookShelfChanger
+              setState={(p) => {
+                this.setState({ books:p});
+                this.props.setState({books:this.state});
+
+              }}
+              book={this.props}
+            />
+          </div>
+          <div className="book-title">
+            <h3>{this.props.title}</h3>
+          </div>
+          <div className="book-authors">{this.props.authors}</div>
         </div>
-        <div className="book-title">
-          <h3>{this.props.title}</h3>
-        </div>
-        <div className="book-authors">{this.props.authors}</div>
-      </div>
       </li>
     );
   }

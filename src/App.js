@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,useEffect } from "react";
 import "./App.css";
 import ListBooks from "./components/ListBooks";
 import Search from "./components/Search";
@@ -10,14 +10,14 @@ class BooksApp extends Component {
     books : [],
   };
   componentDidMount() {
-    BooksAPI.getAll().then((books) => this.setState({ books }));
+      BooksAPI.getAll().then((books) => this.setState({ books }));
   }
 
   render() {
     return (
       <div className="app">
         <div>
-          <Route exact path="/" render={() => <ListBooks books={this.state.books}  />} />
+          <Route exact path="/" render={() => <ListBooks setState={(p) => {this.setState(p);}} />} />
           <Route path="/add" render={({ history }) => <div>To be Added</div>} />
           <Route path="/search" render={({ history }) => <Search books={this.state.books}/>} />
         </div>
