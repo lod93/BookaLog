@@ -10,7 +10,9 @@ class BookShelf extends Component {
           <h2 className="bookshelf-title">{this.props.title}</h2>
           <div className="bookshelf-books">
             <ol className="books-grid">
-              {this.props.shelfBooks.map((book, index) => (
+              {
+              typeof(this.props.shelfBooks) === 'undefined' ||  typeof(this.props.shelfBooks.error) !== 'undefined' ? 'no books found' 
+              : this.props.shelfBooks.map((book, index) => (
                 <Book
                   setState={(p) => {
                     this.setState(p.books);

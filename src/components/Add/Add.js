@@ -1,19 +1,22 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as BooksAPI from "../../BooksAPI";
+import "./searchableWords.js";
 import BookShelf from "../BookShelf/BookShelf";
-class Search extends Component {
-  componentDidMount() {
-    BooksAPI.getAll().then((books) => this.setState({ books }));
-  }
+class Add extends Component {
   state = {
     query: "",
     books: [],
   };
   updateQuery = (query) => {
     this.setState(() => ({
-      query: query.trim(),
+      query: query,
     }));
+    BooksAPI.search(query).then((books) =>
+      this.setState({
+        books,
+      })
+    );
   };
   clearQuery = () => {
     this.updateQuery("");
@@ -22,13 +25,6 @@ class Search extends Component {
   render() {
     const { query } = this.state;
     const { books } = this.state;
-
-    const showingBooks =
-      query === ""
-        ? books
-        : books.filter((c) =>
-            c.title.toLowerCase().includes(query.toLowerCase())
-          );
 
     return (
       <div className="search-books">
@@ -40,7 +36,7 @@ class Search extends Component {
           <div className="search-books-input-wrapper">
             <input
               type="text"
-              placeholder="Search by title or author"
+              placeholder="Search by keyword"
               value={query}
               onChange={(event) => this.updateQuery(event.target.value)}
             />
@@ -48,11 +44,11 @@ class Search extends Component {
         </div>
         <div className="search-books-results">
           <BookShelf
-            title="Search Results"
-            shelfBooks={showingBooks}
             setState={(p) => {
               this.setState(p);
             }}
+            title="Search Results"
+            shelfBooks={books}
           />
         </div>
       </div>
@@ -60,4 +56,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default Add;
