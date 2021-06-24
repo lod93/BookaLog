@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as BooksAPI from "../../BooksAPI";
-import "./searchableWords.js";
 import BookShelf from "../BookShelf/BookShelf";
 class Add extends Component {
   state = {
     query: "",
     books: [],
+    mybook:[],
   };
   updateQuery = (query) => {
     this.setState(() => ({
@@ -45,7 +45,7 @@ class Add extends Component {
         <div className="search-books-results">
           <BookShelf
             setState={(p) => {
-              this.setState(p);
+              this.setState({mybook : p});
             }}
             title="Search Results"
             shelfBooks={books}
