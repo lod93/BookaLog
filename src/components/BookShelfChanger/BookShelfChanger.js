@@ -26,7 +26,6 @@ class BookShelfChanger extends Component {
   };
 
   handleChangeShelf(book, target) {
-    console.log(target + JSON.stringify(book));
     BooksAPI.update(book, target).then(
       BooksAPI.getAll().then((books) => {
         this.setState({ books });
