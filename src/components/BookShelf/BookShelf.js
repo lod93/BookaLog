@@ -29,7 +29,9 @@ class BookShelf extends Component {
                           ? placeholder
                           : book.imageLinks.smallThumbnail
                       }
+                      bookinfo={book}
                       books={this.props.books}
+                      authors={book.authors}
                     />
                   ))}
             </ol>

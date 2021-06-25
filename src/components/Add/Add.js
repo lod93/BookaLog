@@ -6,7 +6,7 @@ class Add extends Component {
   state = {
     query: "",
     books: [],
-    mybook:[],
+    mybook: [],
   };
   updateQuery = (query) => {
     this.setState(() => ({
@@ -45,7 +45,7 @@ class Add extends Component {
         <div className="search-books-results">
           <BookShelf
             setState={(p) => {
-              this.setState({mybook : p});
+              this.setState({ mybook: p });
             }}
             title="Search Results"
             shelfBooks={books}

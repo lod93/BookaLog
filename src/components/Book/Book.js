@@ -2,15 +2,15 @@ import React, { Component } from "react";
 import BookShelfChanger from "../BookShelfChanger";
 
 class Book extends Component {
-  state ={
+  state = {
     books: [],
-  }
-  
+  };
+
   render() {
     const coverStyle = {
       width: 128,
       height: 193,
-      backgroundImage: "url(" +   this.props.url  + ")",
+      backgroundImage: "url(" + this.props.url + ")",
     };
     return (
       <li>
@@ -20,17 +20,24 @@ class Book extends Component {
 
             <BookShelfChanger
               setState={(p) => {
-                this.setState({ books:p});
-                this.props.setState({books:this.state});
-
+                this.setState({ books: p });
+                this.props.setState({ books: this.state });
               }}
-              book={this.props}
+              book={this.props.bookinfo}
             />
           </div>
           <div className="book-title">
-            <h3>{this.props.title}</h3>
+            <h1>{this.props.title}</h1>
           </div>
-          <div className="book-authors">{this.props.authors}</div>
+          <div className="book-authors">
+            {typeof this.props.authors === "undefined"
+              ? "Unknown"
+              : this.props.authors.map((author, index) => (
+                  <span key={index} className="book-author">
+                    {author},
+                  </span>
+                ))}
+          </div>
         </div>
       </li>
     );

@@ -14,6 +14,10 @@ const options = [
     title: "Read",
     value: "read",
   },
+  {
+    title: "None",
+    value: "none",
+  },
 ];
 class BookShelfChanger extends Component {
   state = {
@@ -22,13 +26,13 @@ class BookShelfChanger extends Component {
   };
 
   handleChangeShelf(book, target) {
-    BooksAPI.update(book, target).then(BooksAPI.getAll()
-    .then((books) => {
-    this.setState({ books });
-    this.props.setState(books);
-    }
-    ))
-    ;
+    console.log(target + JSON.stringify(book));
+    BooksAPI.update(book, target).then(
+      BooksAPI.getAll().then((books) => {
+        this.setState({ books });
+        this.props.setState(books);
+      })
+    );
   }
   render() {
     return (

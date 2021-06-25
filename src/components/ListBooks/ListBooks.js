@@ -21,15 +21,11 @@ class ListBooks extends Component {
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
-    
-    if(this.state.books !== books){
-
-    this.setState({ books })
-    
+      if (this.state.books !== books) {
+        this.setState({ books });
+      }
+    });
   }
-}
-);
-}
   render() {
     return (
       <div className="list-books">

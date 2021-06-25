@@ -47,6 +47,7 @@ class Search extends Component {
           </div>
         </div>
         <div className="search-books-results">
+        <div className="list-books-content">
           <BookShelf
             title="Search Results"
             shelfBooks={showingBooks}
@@ -54,6 +55,7 @@ class Search extends Component {
               this.setState(p);
             }}
           />
+        </div>
         </div>
       </div>
     );
