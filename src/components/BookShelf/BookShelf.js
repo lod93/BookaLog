@@ -23,7 +23,11 @@ class BookShelf extends Component {
                       key={index}
                       title={book.title}
                       id={book.id}
-                      shelf={book.shelf}
+                      currentShelf={
+                        typeof book.shelf === "undefined"
+                      ? "none"
+                      :book.shelf
+                    }
                       url={
                         typeof book.imageLinks === "undefined"
                           ? placeholder

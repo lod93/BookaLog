@@ -40,7 +40,7 @@ class ListBooks extends Component {
                   }}
                   key={index}
                   title={Bookshelf.title}
-                  books={this.state.books}
+                  
                   shelfBooks={this.state.books.filter(
                     (book) =>
                       book.shelf.toLowerCase() ===
