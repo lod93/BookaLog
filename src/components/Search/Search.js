@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import * as BooksAPI from "../../BooksAPI";
 import BookShelf from "../BookShelf/BookShelf";
 class Search extends Component {
-  componentDidMount() {
-    BooksAPI.getAll().then((books) => this.setState({ books }));
-  }
+  
   state = {
     query: "",
     books: [],
