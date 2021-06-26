@@ -25,12 +25,13 @@ class BookShelfChanger extends Component {
     books: [],
   };
 
-  handleChangeShelf(book, target) {
-    BooksAPI.update(book, target).then(
-      BooksAPI.getAll().then((books) => {
-        this.props.setState({ books: books });
-      })
-    );
+async updateBooks() {
+const books = await BooksAPI.getAll()
+this.props.setState({ books: books})
+}
+ async handleChangeShelf(book, target) {
+   await BooksAPI.update(book, target);
+    this.updateBooks();
   }
   render() {
     return (
