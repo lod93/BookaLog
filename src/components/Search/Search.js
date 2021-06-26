@@ -21,7 +21,7 @@ class Search extends Component {
 
   render() {
     const { query } = this.state;
-    const { books } = this.state;
+    const { books } = this.props;
 
     const showingBooks =
       query === ""
@@ -47,15 +47,15 @@ class Search extends Component {
           </div>
         </div>
         <div className="search-books-results">
-        <div className="list-books-content">
-          <BookShelf
-            title="Search Results"
-            shelfBooks={showingBooks}
-            setState={(p) => {
-              this.setState(p);
-            }}
-          />
-        </div>
+          <div className="list-books-content">
+            <BookShelf
+              title="Search Results"
+              shelfBooks={showingBooks}
+              setState={(p) => {
+                this.props.setState({ books: p.books });
+              }}
+            />
+          </div>
         </div>
       </div>
     );

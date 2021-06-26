@@ -12,32 +12,32 @@ class BookShelf extends Component {
           <div className="bookshelf-books">
             <ol className="books-grid">
               {typeof this.props.shelfBooks === "undefined" ||
-              typeof this.props.shelfBooks.error !== "undefined"
-                ? "no books found"
-                : this.props.shelfBooks.map((book, index) => (
-                    <Book
-                      setState={(p) => {
-                        this.setState(p.books);
-                        this.props.setState(this.state);
-                      }}
-                      key={index}
-                      title={book.title}
-                      id={book.id}
-                      currentShelf={
-                        typeof book.shelf === "undefined"
-                      ? "none"
-                      :book.shelf
+              typeof this.props.shelfBooks.error !== "undefined" ? (
+                <div className="list-books-title">
+                  <h1 className="">No books found</h1>
+                </div>
+              ) : (
+                this.props.shelfBooks.map((book, index) => (
+                  <Book
+                    setState={(p) => {
+                      this.props.setState({ books: p.books });
+                    }}
+                    key={index}
+                    title={book.title}
+                    currentShelf={
+                      typeof book.shelf === "undefined" ? "none" : book.shelf
                     }
-                      url={
-                        typeof book.imageLinks === "undefined"
-                          ? placeholder
-                          : book.imageLinks.smallThumbnail
-                      }
-                      bookinfo={book}
-                      books={this.props.books}
-                      authors={book.authors}
-                    />
-                  ))}
+                    url={
+                      typeof book.imageLinks === "undefined"
+                        ? placeholder
+                        : book.imageLinks.smallThumbnail
+                    }
+                    bookinfo={book}
+                    books={this.props.books}
+                    authors={book.authors}
+                  />
+                ))
+              )}
             </ol>
           </div>
         </div>

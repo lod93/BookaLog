@@ -45,7 +45,7 @@ class Add extends Component {
         <div className="search-books-results">
           <BookShelf
             setState={(p) => {
-              this.setState({ mybook: p });
+              this.props.setState({ mybook: p });
             }}
             title="Search Results"
             shelfBooks={books}

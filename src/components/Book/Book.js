@@ -19,11 +19,10 @@ class Book extends Component {
             <div className="book-cover" style={coverStyle} />
 
             <BookShelfChanger
-               setState={(p) => {
-                this.setState({ books: p });
-                this.props.setState({ books: this.state });
+              setState={(p) => {
+                this.props.setState({ books: p.books });
               }}
-             book={this.props.bookinfo}
+              book={this.props.bookinfo}
               currentShelf={this.props.currentShelf}
             />
           </div>

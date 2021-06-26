@@ -28,9 +28,7 @@ class BookShelfChanger extends Component {
   handleChangeShelf(book, target) {
     BooksAPI.update(book, target).then(
       BooksAPI.getAll().then((books) => {
-        this.setState({ books });
-        this.props.setState(books);
-        
+        this.props.setState({ books: books });
       })
     );
   }
@@ -39,9 +37,9 @@ class BookShelfChanger extends Component {
       <div className="book-shelf-changer">
         <select
           value={this.props.currentShelf}
-          onChange={(event) =>
-            this.handleChangeShelf(this.props.book, event.target.value)
-          }
+          onChange={(event) => {
+            this.handleChangeShelf(this.props.book, event.target.value);
+          }}
         >
           <option value="move" disabled>
             Move to...
