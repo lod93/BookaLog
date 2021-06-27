@@ -6,16 +6,15 @@ class Add extends Component {
   state = {
     query: "",
     books: [],
-    mybook: [],
+    searchBooks: [],
   };
+
   updateQuery = (query) => {
     this.setState(() => ({
       query: query,
     }));
     BooksAPI.search(query).then((books) =>
-      this.setState({
-        books,
-      })
+      this.setState({searchBooks:books})
     );
   };
   clearQuery = () => {
@@ -24,7 +23,7 @@ class Add extends Component {
 
   render() {
     const { query } = this.state;
-    const { books } = this.state;
+    const { searchBooks } = this.state;
 
     return (
       <div className="search-books">
@@ -45,10 +44,10 @@ class Add extends Component {
         <div className="search-books-results">
           <BookShelf
             setState={(p) => {
-              this.props.setState({ mybook: p });
+              this.props.setState({ books: p.books });
             }}
             title="Search Results"
-            shelfBooks={books}
+            shelfBooks={searchBooks}
           />
         </div>
       </div>
